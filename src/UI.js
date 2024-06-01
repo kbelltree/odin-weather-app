@@ -12,6 +12,39 @@ const uiElements = {
   forecastDayContainer: document.querySelectorAll(".forecast-container > div"),
 };
 
+// Weather code assigned with corresponding class name for background color effect
+const weatherColorNameByCode = {
+  1000: "sunny",
+  1003: "cloudy",
+  1006: "cloudy",
+  1009: "cloudy",
+  1030: "foggy",
+  1063: "rainy",
+  1066: "rainy",
+  1069: "rainy",
+  1072: "rainy",
+  1087: "storm",
+  1114: "rainy",
+  1117: "rainy",
+  1135: "foggy",
+  1147: "foggy",
+  1150: "rainy",
+  1153: "rainy",
+  1168: "rainy",
+  1171: "rainy",
+  1180: "rainy",
+  1183: "rainy",
+  1186: "rainy",
+  1189: "rainy",
+  1192: "rainy",
+  1195: "rainy",
+  1198: "rainy",
+  1201: "rainy",
+  1204: "rainy",
+  1207: "rainy",
+  1210: "rainy",
+};
+
 function displayText(uiElement, dataProperty) {
   console.log("uiElement:", uiElement, "dataProperty:", dataProperty);
   uiElement.textContent = dataProperty;
@@ -19,6 +52,19 @@ function displayText(uiElement, dataProperty) {
 
 function displayIcon(uiElement, dataProperty) {
   uiElement.src = dataProperty;
+}
+
+function addBackgroundColorByCondition(codeNumber, isNight = false) {
+  const body = document.body;
+  const colorName = weatherColorNameByCode[codeNumber];
+  body.dataset.color = "";
+  if (colorName) {
+    // Color for sunny night
+    if (codeNumber === 1000 && isNight) {
+      body.dataset.color === "clear";
+    }
+    body.dataset.color = colorName;
+  }
 }
 
 export function getInputLocationValue(uiElement) {
@@ -71,6 +117,10 @@ export function displayCurrentWeather(currentDataObj, tempUnit) {
       return;
   }
   displayText(uiElements.humidityDisplay, currentDataObj.humidity);
+  addBackgroundColorByCondition(
+    currentDataObj.conditionCode,
+    currentDataObj.isNightTime,
+  );
 }
 
 export function displayForecast(dataArray, tempUnit) {

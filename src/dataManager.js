@@ -76,11 +76,13 @@ export function getTransformedData(fetchedData) {
       localTimeDate: formatCurrentDateTime(fetchedData.location.localtime),
       conditionIconUrl: fetchedData.current.condition.icon,
       conditionText: fetchedData.current.condition.text,
+      conditionCode: fetchedData.current.condition.code,
       tempC: `${fetchedData.current.temp_c}°C`,
       feelsLikeC: `${fetchedData.current.feelslike_c}°C`,
       tempF: `${fetchedData.current.temp_f}°F`,
       feelsLikeF: `${fetchedData.current.feelslike_f}°F`,
       humidity: `${fetchedData.current.humidity}%`,
+      isNightTime: fetchedData.current.is_day === 0 ? true : false,
     },
     // Sorted data returned in a new array for easier access to data
     forecastArray: fetchedData.forecast.forecastday.map((dataObj) => {
