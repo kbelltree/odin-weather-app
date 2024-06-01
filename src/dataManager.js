@@ -1,3 +1,5 @@
+import { parse, parseISO, getDay, format } from "date-fns";
+
 // fetch weatherAPI data is set to return 3 days forecast
 export async function fetchWeatherDataByLocation(inputValue) {
   try {
@@ -19,23 +21,49 @@ export async function fetchWeatherDataByLocation(inputValue) {
 }
 
 function getDayFromDate(dateString) {
-  // Transform date string to Date instance to use getDay()
-  const formattedDate = new Date(dateString);
-  const daysArray = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-  const dayIndex = formattedDate.getDay();
-  if (isNaN(dayIndex)) {
-    console.error("The date is invalid.");
-    return;
+  try {
+    // Because forecast date is midnight UTC base, keep the date as is using parseISO instead of new Date() that causes localization.
+    const formattedDate = parseISO(dateString);
+    console.log(
+      "original dateString: ",
+      dateString,
+      " formattedDate: ",
+      formattedDate,
+    );
+    const dayIndex = getDay(formattedDate);
+    console.log("dayIndex: ", dayIndex);
+    const daysArray = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    if (isNaN(dayIndex)) {
+      throw new Error("DayIndex is NaN.");
+    }
+    return daysArray[dayIndex];
+  } catch (error) {
+    console.error("Could not get the day of the week.: ", error.message);
+    return null;
   }
-  return daysArray[dayIndex];
+}
+
+function formatCurrentDateTime(dateTimeString) {
+  try {
+    const parsed = parse(dateTimeString, "yyyy-MM-dd HH:mm", new Date());
+    console.log("parsedCurrentDateTime: ", parsed);
+    if (isNaN(parsed)) {
+      throw new Error("Invalid date");
+    }
+    const formattedResult = format(parsed, "EEEE, MMMM do 'at' h:mm a");
+    return formattedResult;
+  } catch (error) {
+    console.error("Failed in formatting current date time: ", error.message);
+    return null;
+  }
 }
 
 // Make accessing a piece of data easier than direct access to original data
@@ -45,7 +73,7 @@ export function getTransformedData(fetchedData) {
       cityNameText: fetchedData.location.name,
       regionText: fetchedData.location.region,
       cityAndRegion: `${fetchedData.location.name}, ${fetchedData.location.region}`,
-      localTimeDate: fetchedData.location.localtime,
+      localTimeDate: formatCurrentDateTime(fetchedData.location.localtime),
       conditionIconUrl: fetchedData.current.condition.icon,
       conditionText: fetchedData.current.condition.text,
       tempC: `${fetchedData.current.temp_c}°C`,
