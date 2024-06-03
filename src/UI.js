@@ -1,5 +1,6 @@
 const uiElements = {
-  messageText: document.getElementById("message"),
+  messageText: document.getElementById("regular-message"),
+  errorMessageText: document.getElementById("error-message"),
   tempCButton: document.getElementById("celsius"),
   tempFButton: document.getElementById("fahrenheit"),
   locationText: document.getElementById("location"),
@@ -12,39 +13,6 @@ const uiElements = {
   forecastDayContainer: document.querySelectorAll(".forecast-container > div"),
 };
 
-// Weather code assigned with corresponding class name for background color effect
-const weatherColorNameByCode = {
-  1000: "sunny",
-  1003: "cloudy",
-  1006: "cloudy",
-  1009: "cloudy",
-  1030: "foggy",
-  1063: "rainy",
-  1066: "rainy",
-  1069: "rainy",
-  1072: "rainy",
-  1087: "storm",
-  1114: "rainy",
-  1117: "rainy",
-  1135: "foggy",
-  1147: "foggy",
-  1150: "rainy",
-  1153: "rainy",
-  1168: "rainy",
-  1171: "rainy",
-  1180: "rainy",
-  1183: "rainy",
-  1186: "rainy",
-  1189: "rainy",
-  1192: "rainy",
-  1195: "rainy",
-  1198: "rainy",
-  1201: "rainy",
-  1204: "rainy",
-  1207: "rainy",
-  1210: "rainy",
-};
-
 function displayText(uiElement, dataProperty) {
   console.log("uiElement:", uiElement, "dataProperty:", dataProperty);
   uiElement.textContent = dataProperty;
@@ -54,13 +22,12 @@ function displayIcon(uiElement, dataProperty) {
   uiElement.src = dataProperty;
 }
 
-function addBackgroundColorByCondition(codeNumber, isNight = false) {
+function addBackgroundColorByCode(colorName, isDay) {
   const body = document.body;
-  const colorName = weatherColorNameByCode[codeNumber];
   body.dataset.color = "";
   if (colorName) {
     // Color for sunny night
-    if (codeNumber === 1000 && isNight) {
+    if (colorName === "sunny" && !isDay) {
       body.dataset.color = "clear";
     } else {
       body.dataset.color = colorName;
@@ -95,7 +62,16 @@ export function highlightCurrentTempUnit(state) {
 }
 
 export function displayErrorMessage(messageStr) {
-  uiElements.messageText.textContent = messageStr;
+  uiElements.messageText.classList.add("hidden");
+  uiElements.errorMessageText.textContent = messageStr;
+  uiElements.errorMessageText.classList.remove("hidden");
+}
+
+export function clearErrorMessage() {
+  if (uiElements.messageText.classList.contains("hidden")) {
+    uiElements.errorMessageText.classList.add("hidden");
+    uiElements.messageText.classList.remove("hidden");
+  }
 }
 
 export function displayCurrentWeather(currentDataObj, tempUnit) {
@@ -118,10 +94,7 @@ export function displayCurrentWeather(currentDataObj, tempUnit) {
       return;
   }
   displayText(uiElements.humidityDisplay, currentDataObj.humidity);
-  addBackgroundColorByCondition(
-    currentDataObj.conditionCode,
-    currentDataObj.isNightTime,
-  );
+  addBackgroundColorByCode(currentDataObj.conditionCode, currentDataObj.isDay);
 }
 
 export function displayForecast(dataArray, tempUnit) {
