@@ -61,9 +61,10 @@ function addBackgroundColorByCondition(codeNumber, isNight = false) {
   if (colorName) {
     // Color for sunny night
     if (codeNumber === 1000 && isNight) {
-      body.dataset.color === "clear";
+      body.dataset.color = "clear";
+    } else {
+      body.dataset.color = colorName;
     }
-    body.dataset.color = colorName;
   }
 }
 
