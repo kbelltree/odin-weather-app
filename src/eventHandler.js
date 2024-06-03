@@ -8,6 +8,7 @@ import {
   displayCurrentWeather,
   displayForecast,
   displayErrorMessage,
+  clearErrorMessage,
   highlightCurrentTempUnit,
 } from "./UI.js";
 
@@ -29,8 +30,8 @@ async function displayProcessedWeatherData() {
     displayCurrentWeather(currentWeatherObj, currentTempUnit);
     displayForecast(forecastDataArray, currentTempUnit);
   } catch (error) {
-    console.error(`Error displaying weather data: ${error}`);
-    displayErrorMessage(`Precise entry would be helpful.`);
+    console.error("Data display error: ", error.message);
+    displayErrorMessage(`Precise city and country entry would be helpful.`);
   }
 }
 
@@ -42,8 +43,13 @@ export function handleSearchEnter(e) {
   }
 }
 
+export function handleSearchInput() {
+  clearErrorMessage();
+}
+
 export function handleFirstContentLoad() {
   displayProcessedWeatherData();
+  highlightCurrentTempUnit(currentTempUnit);
 }
 
 // Attach this event listener to parent div
