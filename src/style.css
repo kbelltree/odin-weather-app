@@ -1,0 +1,426 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font: inherit;
+}
+
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  src: url("./fonts/open-sans-v40-latin-600.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* open-sans-700 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 700;
+  src: url("./fonts/open-sans-v40-latin-700.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* pt-sans-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "PT Sans";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./fonts/pt-sans-v17-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* pt-sans-700 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "PT Sans";
+  font-style: normal;
+  font-weight: 700;
+  src: url("./fonts/pt-sans-v17-latin-700.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+:root {
+  --main-font-color: black;
+  --sub-font-color: #616161;
+  --alert-font-color: crimson;
+  --sunny: linear-gradient(
+    to top,
+    rgba(255, 250, 205, 0),
+    rgb(255, 250, 205),
+    rgb(251, 232, 58)
+  );
+  --sunny-solid: rgb(255, 250, 205);
+  --clear-night: linear-gradient(to top, rgb(148, 148, 247), rgb(1, 1, 186));
+  --clear-night-solid: rgb(1, 1, 186);
+  --cloudy: linear-gradient(to top, rgba(160, 180, 200, 0), rgb(160, 180, 200));
+  --cloudy-solid: rgba(160, 180, 200, 0.8);
+  --foggy: linear-gradient(to top, rgba(214, 213, 213, 0), rgb(214, 213, 213));
+  --foggy-solid: rgb(214, 213, 213);
+  --storm: linear-gradient(to top, rgba(144, 168, 183, 0), rgb(144, 168, 183));
+  --storm-solid: rgba(144, 168, 183, 0.7);
+  --rainy: linear-gradient(to top, rgba(174, 189, 204, 0), rgb(174, 189, 204));
+  --rainy-solid: rgba(174, 189, 204, 0.7);
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: "PT Sans";
+  font-weight: 400;
+  background: white;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  padding: 0 3rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* For browsers but not workable with mobiles */
+}
+
+h1 {
+  font-family: "Open Sans";
+  font-weight: 600;
+  font-size: 2.5rem;
+  color: var(--main-font-color);
+}
+
+h2 {
+  font-size: 1.75rem;
+  color: var(--sub-font-color);
+}
+
+h3 {
+  font-size: 2rem;
+  color: var(--sub-font-color);
+}
+
+button {
+  font-family: "Open Sans";
+  font-weight: 600;
+  background: none;
+  box-shadow: none;
+  cursor: pointer;
+  border: none;
+  font-size: 3.5rem;
+  padding: 0;
+}
+
+input {
+  height: 2.25rem;
+  min-width: 18rem;
+  padding-left: 0.5rem;
+  border: 1.5px solid white;
+  border-radius: 5px;
+}
+
+div.header-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  align-items: center;
+  margin-top: 2rem;
+}
+
+#heading-wrapper {
+  text-align: center;
+}
+
+#query-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+}
+
+#query-wrapper label {
+  flex-shrink: 0;
+}
+
+#query-wrapper svg {
+  vertical-align: middle;
+}
+
+#query-wrapper p#message {
+  margin-top: 0.5rem;
+  margin-left: 2.75rem;
+}
+
+#temp-button-container {
+  /* align-self: flex-start; */
+  flex-shrink: 0;
+}
+
+#temp-button-container > span {
+  font-size: 3.5rem;
+  padding: 0 1rem;
+}
+
+#temp-button-container > button {
+  color: var(--sub-font-color);
+}
+
+div.main-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3.5rem;
+}
+
+div.main-container p {
+  color: var(--sub-font-color);
+  font-size: 1.75rem;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+img#current-icon {
+  width: 16rem;
+  height: auto;
+}
+
+p#condition {
+  color: black;
+  margin-top: -2rem;
+}
+
+p#current-temp {
+  font-family: "Open Sans";
+  font-weight: 700;
+  color: var(--main-font-color);
+  font-size: 4rem;
+}
+
+div.forecast-container {
+  flex-grow: 1;
+  display: flex;
+  margin-bottom: 1.25rem;
+}
+
+div.forecast-container > div {
+  width: calc(100% / 3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+img.icon {
+  width: 8rem;
+  height: auto;
+}
+
+div.forecast-container p {
+  color: var(--sub-font-color);
+  text-align: center;
+  font-size: 1.25rem;
+}
+
+div#day-2 {
+  border-left: solid 1px #737373;
+  border-right: solid 1px #737373;
+}
+
+div.credit-container {
+  font-size: 0.75;
+  flex-shrink: 0;
+  margin: auto;
+  color: darkgray;
+  padding-bottom: 1rem;
+}
+
+div.credit-container a {
+  color: darkgray;
+  font-weight: 700;
+}
+
+/* display utility */
+.hidden {
+  display: none;
+}
+
+/* font color change utility */
+span#error-message {
+  color: var(--alert-font-color);
+}
+
+#temp-button-container > button.on {
+  color: var(--main-font-color);
+}
+
+/* body color changer utility */
+body[data-color="sunny"] {
+  background-image: var(--sunny);
+}
+
+body[data-color="cloudy"] {
+  background-image: var(--cloudy);
+}
+
+body[data-color="foggy"] {
+  background-image: var(--foggy);
+}
+
+body[data-color="storm"] {
+  background-image: var(--storm);
+}
+
+body[data-color="rainy"] {
+  background-image: var(--rainy);
+}
+
+body[data-color="clear"] {
+  background-image: var(--clear-night);
+}
+
+body[data-color="clear"] h1,
+body[data-color="clear"] #temp-button-container > button.on,
+body[data-color="clear"] p#current-temp,
+body[data-color="clear"] p#condition {
+  color: white;
+}
+
+body[data-color="clear"] h2,
+body[data-color="clear"] h3,
+body[data-color="clear"] #temp-button-container > button,
+body[data-color="clear"] span,
+body[data-color="clear"] p,
+body[data-color="clear"] .credit-container,
+body[data-color="clear"] .credit-container a {
+  color: lightgray;
+}
+
+body[data-color="clear"] #query-wrapper svg {
+  fill: white;
+}
+
+@media screen and (max-width: 1020px) {
+  body {
+    padding: 0 1rem;
+  }
+
+  div#query-wrapper {
+    flex-direction: column;
+    order: -1;
+    gap: 0;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  button {
+    font-size: 2.5rem;
+    padding: 0;
+  }
+
+  #temp-button-container > span {
+    font-size: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  body {
+    background-image: none;
+  }
+
+  h3 {
+    padding-top: 1rem;
+  }
+
+  p#current-temp {
+    font-size: 3rem;
+  }
+
+  div.main-container {
+    flex-direction: column;
+  }
+
+  img#current-icon {
+    width: 12rem;
+    height: auto;
+  }
+
+  div.main-container p {
+    font-size: 1.25rem;
+  }
+
+  div.forecast-container {
+    flex-direction: column;
+  }
+
+  div#day-1,
+  div#day-2,
+  div#day-3 {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
+  }
+
+  div#day-1 h3.what-day,
+  div#day-2 h3.what-day,
+  div#day-3 h3.what-day {
+    grid-area: 1 / 1 / 2 / -1;
+    justify-self: center;
+  }
+
+  div#day-1 img.icon,
+  div#day-2 img.icon,
+  div#day-3 img.icon {
+    grid-area: 2 / 1 / -1 / 2;
+  }
+
+  div#day-1 div.forecast-details,
+  div#day-2 div.forecast-details,
+  div#day-3 div.forecast-details {
+    grid-area: 2 / 2 / -1 / -1;
+  }
+
+  div#day-2 {
+    border: none;
+  }
+
+  /* body color changer utility */
+  body[data-color="sunny"] {
+    background: var(--sunny-solid);
+  }
+
+  body[data-color="cloudy"] {
+    background: var(--cloudy-solid);
+  }
+
+  body[data-color="foggy"] {
+    background: var(--foggy-solid);
+  }
+
+  body[data-color="storm"] {
+    background: var(--storm-solid);
+  }
+
+  body[data-color="rainy"] {
+    background: var(--rainy-solid);
+  }
+
+  body[data-color="clear"] {
+    background: var(--clear-night-solid);
+  }
+}
