@@ -31,15 +31,6 @@
   src: url("./fonts/pt-sans-v17-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
-/* pt-sans-700 - latin */
-@font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: "PT Sans";
-  font-style: normal;
-  font-weight: 700;
-  src: url("./fonts/pt-sans-v17-latin-700.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-
 :root {
   --main-font-color: black;
   --sub-font-color: #616161;
@@ -154,7 +145,6 @@ div.header-container {
 }
 
 #temp-button-container {
-  /* align-self: flex-start; */
   flex-shrink: 0;
 }
 
@@ -164,7 +154,7 @@ div.header-container {
 }
 
 #temp-button-container > button {
-  color: var(--sub-font-color);
+  color: #737373;
 }
 
 div.main-container {
