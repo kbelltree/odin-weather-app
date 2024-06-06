@@ -2,7 +2,10 @@ import {
   handleSearchEnter,
   handleFirstContentLoad,
   handleTempUnitButtonClick,
+  handleSearchInput,
 } from "./eventHandler.js";
+
+import "./style.css";
 
 const temperatureBtnContainer = document.getElementById(
   "temp-button-container",
@@ -13,4 +16,5 @@ document.addEventListener("DOMContentLoaded", handleFirstContentLoad, {
   once: true,
 });
 searchInput.addEventListener("keydown", handleSearchEnter);
+searchInput.addEventListener("input", handleSearchInput);
 temperatureBtnContainer.addEventListener("click", handleTempUnitButtonClick);
