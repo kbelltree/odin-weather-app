@@ -14,7 +14,6 @@ const uiElements = {
 };
 
 function displayText(uiElement, dataProperty) {
-  console.log("uiElement:", uiElement, "dataProperty:", dataProperty);
   uiElement.textContent = dataProperty;
 }
 
@@ -75,7 +74,6 @@ export function clearErrorMessage() {
 }
 
 export function displayCurrentWeather(currentDataObj, tempUnit) {
-  console.dir(currentDataObj);
   displayText(uiElements.locationText, currentDataObj.cityAndRegion);
   displayText(uiElements.timeStampDisplay, currentDataObj.localTimeDate);
   displayIcon(uiElements.currentIcon, currentDataObj.conditionIconUrl);

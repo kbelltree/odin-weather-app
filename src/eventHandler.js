@@ -18,7 +18,6 @@ let currentLocation = "san francisco, us";
 // Attach to search box
 function updateLocation(e) {
   currentLocation = getInputLocationValue(e.target);
-  console.log(`location: ${currentLocation}`);
 }
 
 async function displayProcessedWeatherData() {
@@ -59,5 +58,4 @@ export function handleTempUnitButtonClick(e) {
     highlightCurrentTempUnit(currentTempUnit);
     displayProcessedWeatherData();
   }
-  console.log(`current unit: ${currentTempUnit}`);
 }

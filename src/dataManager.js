@@ -8,12 +8,10 @@ export async function fetchWeatherDataByLocation(inputValue) {
         `,
       { mode: "cors" },
     );
-    console.log(`fetchWeatherDataByLocation Started.`);
     if (!response.ok) {
       throw new Error(`Fetch API error: ${response.status}`);
     }
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error(error);
@@ -24,14 +22,7 @@ function getDayFromDate(dateString) {
   try {
     // Because forecast date is midnight UTC base, keep the date as is using parseISO instead of new Date() that causes localization.
     const formattedDate = parseISO(dateString);
-    console.log(
-      "original dateString: ",
-      dateString,
-      " formattedDate: ",
-      formattedDate,
-    );
     const dayIndex = getDay(formattedDate);
-    console.log("dayIndex: ", dayIndex);
     const daysArray = [
       "Sunday",
       "Monday",
@@ -54,7 +45,6 @@ function getDayFromDate(dateString) {
 function formatCurrentDateTime(dateTimeString) {
   try {
     const parsed = parse(dateTimeString, "yyyy-MM-dd HH:mm", new Date());
-    console.log("parsedCurrentDateTime: ", parsed);
     if (isNaN(parsed)) {
       throw new Error("Invalid date");
     }
