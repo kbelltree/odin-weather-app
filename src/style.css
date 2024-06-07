@@ -69,7 +69,6 @@ body {
   display: flex;
   flex-direction: column;
   overflow: auto;
-  padding: 0 3rem;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
