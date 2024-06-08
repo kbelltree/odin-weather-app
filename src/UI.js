@@ -73,6 +73,14 @@ export function clearErrorMessage() {
   }
 }
 
+export function displayLoader() {
+  document.getElementById("loader").classList.add("show");
+}
+
+export function hideLoader() {
+  document.getElementById("loader").classList.remove("show");
+}
+
 export function displayCurrentWeather(currentDataObj, tempUnit) {
   displayText(uiElements.locationText, currentDataObj.cityAndRegion);
   displayText(uiElements.timeStampDisplay, currentDataObj.localTimeDate);

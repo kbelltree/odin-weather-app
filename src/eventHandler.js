@@ -10,6 +10,8 @@ import {
   displayErrorMessage,
   clearErrorMessage,
   highlightCurrentTempUnit,
+  displayLoader,
+  hideLoader,
 } from "./UI.js";
 
 let currentTempUnit = "f";
@@ -21,6 +23,8 @@ function updateLocation(e) {
 }
 
 async function displayProcessedWeatherData() {
+  // show loader while fetching
+  displayLoader();
   try {
     const rawData = await fetchWeatherDataByLocation(currentLocation);
     const transformedData = getTransformedData(rawData);
@@ -31,6 +35,9 @@ async function displayProcessedWeatherData() {
   } catch (error) {
     console.error("Data display error: ", error.message);
     displayErrorMessage(`Precise city and country entry would be helpful.`);
+  } finally {
+    // remove the loader layer
+    hideLoader();
   }
 }
 
