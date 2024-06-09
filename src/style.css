@@ -113,8 +113,8 @@ input {
 
 img {
   width: 100%;
-  height: auto;  
-  object-fit: cover; 
+  height: auto;
+  object-fit: cover;
 }
 
 div.header-container {
@@ -180,14 +180,14 @@ div.main-container p {
 }
 
 div#place-holder-main {
-  aspect-ratio: 1; 
-  width: 16rem; 
+  aspect-ratio: 1;
+  width: 16rem;
   overflow: hidden;
-} 
+}
 
 p#condition {
   color: black;
-  margin-top: -2rem;
+  margin-top: -1rem;
 }
 
 p#current-temp {
@@ -265,7 +265,7 @@ div#loader.show {
 /* message display utility */
 span#regular-message.hidden,
 span#error-message.hidden {
-  display: none; 
+  display: none;
 }
 
 /* font color change utility */
@@ -274,7 +274,7 @@ span#error-message {
   display: inline-block;
   color: var(--alert-font-color);
   width: 18rem;
-  word-wrap: break-word; 
+  word-wrap: break-word;
 }
 
 #temp-button-container > button.on {
@@ -379,10 +379,10 @@ body[data-color="clear"] #query-wrapper svg {
   }
 
   div#place-holder-main {
-    aspect-ratio: 1; 
-    width: 12rem; 
+    aspect-ratio: 1;
+    width: 12rem;
     overflow: hidden;
-  } 
+  }
 
   div.main-container p {
     font-size: 1.25rem;
